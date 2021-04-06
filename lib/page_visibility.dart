@@ -7,7 +7,7 @@ abstract class PageVisibilityObserver {
   void onPageHide({bool isBackgroundEvent});
   void onPageDestroy();
 }
-
+/// 页面生命周期绑定类
 class PageVisibilityBinding {
   PageVisibilityBinding._();
   static final PageVisibilityBinding instance = PageVisibilityBinding._();

@@ -34,20 +34,21 @@ class FlutterBoostApp extends StatefulWidget {
 }
 
 class FlutterBoostAppState extends State<FlutterBoostApp> {
+  // 记录页面出栈入栈的完成事件
   final Map<String, Completer<Object>> _pendingResult =
       <String, Completer<Object>>{};
-
+  // 页面容器集合
   List<BoostContainer> get containers => _containers;
   final List<BoostContainer> _containers = <BoostContainer>[];
 
   BoostContainer get topContainer => containers.last;
-
+  // 页面路由Api（通过channel由native处理）
   NativeRouterApi get nativeRouterApi => _nativeRouterApi;
   NativeRouterApi _nativeRouterApi;
-
+  // 承接来自channel的信息
   BoostFlutterRouterApi get boostFlutterRouterApi => _boostFlutterRouterApi;
   BoostFlutterRouterApi _boostFlutterRouterApi;
-
+  // 页面路由工厂方法
   FlutterBoostRouteFactory get routeFactory => widget.routeFactory;
   final Set<int> _activePointers = <int>{};
 
@@ -115,7 +116,7 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
       return Uuid().v4() + '#$pageName';
     }
   }
-
+  /// 创建一个页面容器管理类，实际页面是 BoostPage
   BoostContainer _createContainer(PageInfo pageInfo) {
     pageInfo.uniqueId ??= _createUniqueId(pageInfo.pageName);
     return BoostContainer(
@@ -191,10 +192,18 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
     _cancelActivePointers();
     final BoostContainer existed = _findContainerByUniqueId(uniqueId);
     if (existed != null) {
+      // 当前push的页面已经存在dart栈中
       if (topContainer?.pageInfo?.uniqueId != uniqueId) {
+        /**
+         * 即将push的页面是不在栈顶
+         * 移除栈中的页面
+         * 将即将显示的页面添加在最后
+         * 刷新显示
+         * */
         containers.remove(existed);
         containers.add(existed);
         refresh();
+        // 传递页面生命周期事件
         PageVisibilityBinding.instance
             .dispatchPageShowEvent(_getCurrentPageRoute());
         if (_getPreviousPageRoute() != null) {
@@ -202,15 +211,19 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
               .dispatchPageHideEvent(_getPreviousPageRoute());
         }
       } else {
+        // 如果即将push的页面就在栈顶，无需其他操作，只传递pageOnShow 即可
         PageVisibilityBinding.instance
             .dispatchPageShowEvent(_getCurrentPageRoute());
       }
-    } else {
+    } else
+      {
+      // 当前push的页面不在栈中
       final PageInfo pageInfo = PageInfo(
           pageName: pageName,
           uniqueId: uniqueId ?? _createUniqueId(pageName),
           arguments: arguments,
           withContainer: withContainer);
+      // withContainer 是否新起一个native页面，还是在当前dart容器中路由
       if (withContainer) {
         containers.add(_createContainer(pageInfo));
         // The observer can't receive the 'pageshow' message indeed，
@@ -249,11 +262,13 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
         Logger.error('uniqueId=$uniqueId not find');
         return;
       }
+      // pop 的不是最顶层页面，
       if (container != topContainer) {
         _removeContainer(container);
         return;
       }
     } else {
+      // 如果未传 uniqueId，默认pop最顶层页面
       container = topContainer;
     }
 
@@ -271,7 +286,7 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
     Logger.log(
         'pop container, uniqueId=$uniqueId, arguments:$arguments, $container');
   }
-
+  /// 移除 container，同时如果当前container 是新起的独立页面，通过channel 传给native
   void _removeContainer(BoostContainer page) {
     containers.remove(page);
     if (page.pageInfo.withContainer) {
@@ -284,21 +299,19 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
     }
   }
 
+  /// 一些app事件的传递
   void onForeground() {
     PageVisibilityBinding.instance
         .dispatchForegroundEvent(_getCurrentPageRoute());
   }
-
   void onBackground() {
     PageVisibilityBinding.instance
         .dispatchBackgroundEvent(_getCurrentPageRoute());
   }
-
   void onNativeViewShow() {
     PageVisibilityBinding.instance
         .dispatchPageHideEvent(_getCurrentPageRoute());
   }
-
   void onNativeViewHide() {
     PageVisibilityBinding.instance
         .dispatchPageShowEvent(_getCurrentPageRoute());
@@ -323,7 +336,7 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
     }
     return null;
   }
-
+  /// 通过 uniqueId 找到对应的boostContainer
   BoostContainer _findContainerByUniqueId(String uniqueId) {
     return containers.singleWhere(
         (BoostContainer element) => element.pageInfo.uniqueId == uniqueId,
@@ -369,7 +382,7 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
     return count;
   }
 }
-
+/// 继承自抽象类Page
 class BoostPage<T> extends Page<T> {
   BoostPage({LocalKey key, this.routeFactory, this.pageInfo})
       : super(key: key, name: pageInfo.pageName, arguments: pageInfo.arguments);
@@ -397,7 +410,7 @@ class BoostPage<T> extends Page<T> {
     return _route.first;
   }
 }
-
+/// 导航监听 继承自 NavigatorObserver
 class BoostNavigatorObserver extends NavigatorObserver {
   BoostNavigatorObserver();
 

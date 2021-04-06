@@ -75,6 +75,7 @@ class BoostNavigator {
   }
 }
 
+/// 页面信息类 存储页面信息
 class PageInfo {
   PageInfo({this.pageName, this.uniqueId, this.arguments, this.withContainer});
 

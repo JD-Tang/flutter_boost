@@ -47,7 +47,7 @@ class StackInfo {
       ..routes = pigeonMap['routes'] as Map<Object, Object>;
   }
 }
-
+/// 路由抽象类，用于接收来自channel的信息，包括页面路由、前台、后台、视图展示隐藏等
 abstract class FlutterRouterApi {
   void pushRoute(CommonParams arg);
   void popRoute(CommonParams arg);
@@ -157,7 +157,7 @@ abstract class FlutterRouterApi {
     }
   }
 }
-
+/// 基于Native的路由类，通过channel实现各类跳转及堆栈处理
 class NativeRouterApi {
   Future<void> pushNativeRoute(CommonParams arg) async {
     final Object encoded = arg.encode();

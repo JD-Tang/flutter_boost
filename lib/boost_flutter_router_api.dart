@@ -2,6 +2,7 @@ import 'package:flutter_boost/flutter_boost_app.dart';
 import 'package:flutter_boost/messages.dart';
 
 /// The MessageChannel counterpart on the Dart side.
+/// 用于接收来自channel的信息并转发到 FlutterApp 中处理
 class BoostFlutterRouterApi extends FlutterRouterApi {
   factory BoostFlutterRouterApi(FlutterBoostAppState appState) {
     if (_instance == null) {

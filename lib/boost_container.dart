@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_boost/boost_navigator.dart';
 import 'package:flutter_boost/flutter_boost_app.dart';
 
+/// 页面容器管理类，管理BoostPage实例，包括所有的page实例和Navigator，同时自己实现了 NavigatorObserver（BoostNavigatorObserver）
+/// BoostNavigatorObserver 继承自 NavigatorObserver，在 didPush、didPop 时通过单例类 PageVisibilityBinding，向各个页面抛事件
 class BoostContainer extends StatefulWidget {
   BoostContainer({LocalKey key, this.routeFactory, this.pageInfo})
       : super(key: key) {
