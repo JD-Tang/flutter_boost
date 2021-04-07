@@ -78,7 +78,7 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.dark,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan,
         textTheme: new TextTheme(title: TextStyle(color: Colors.black)),
         leading: Builder(builder: (BuildContext context) {
           return IconButton(
@@ -148,7 +148,7 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                     color: Colors.yellow,
                     child: Text(
                       'open native page',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () => BoostNavigator.of().push("native"),
               ),
@@ -158,8 +158,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                     margin: const EdgeInsets.all(8.0),
                     color: Colors.yellow,
                     child: Text(
-                      'open imagepick demo',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'open imagepick demo(通过路由新起页面)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () =>
                     BoostNavigator.of().push("imagepick", withContainer: true),
@@ -170,8 +170,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                       margin: const EdgeInsets.all(8.0),
                       color: Colors.yellow,
                       child: Text(
-                        'open willPop demo',
-                        style: TextStyle(fontSize: 22.0, color: Colors.black),
+                        'open willPop demo(通过路由新起页面)',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
                       )),
                   onTap: () =>
                       BoostNavigator.of().push("willPop", withContainer: true)),
@@ -181,8 +181,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                       margin: const EdgeInsets.all(8.0),
                       color: Colors.yellow,
                       child: Text(
-                        'mediaquery demo',
-                        style: TextStyle(fontSize: 22.0, color: Colors.black),
+                        'mediaquery demo(通过路由新起页面)',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
                       )),
                   onTap: () => BoostNavigator.of()
                       .push("mediaquery", withContainer: true)),
@@ -192,8 +192,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                     margin: const EdgeInsets.all(8.0),
                     color: Colors.yellow,
                     child: Text(
-                      'push flutter widget',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'push flutter widget(内部路由跳转Widget)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () {
                   Navigator.push<dynamic>(context,
@@ -206,8 +206,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                       margin: const EdgeInsets.all(8.0),
                       color: Colors.yellow,
                       child: Text(
-                        'returning data demo',
-                        style: TextStyle(fontSize: 22.0, color: Colors.black),
+                        'returning data demo(通过路由新起页面)',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
                       )),
                   onTap: () => BoostNavigator.of()
                       .push("returnData", withContainer: true)),
@@ -217,8 +217,8 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget>
                     margin: const EdgeInsets.all(8.0),
                     color: Colors.yellow,
                     child: Text(
-                      'open transparent widget',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'open transparent widget(通过路由新起页面)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () {
                   // final overlay = Overlay.of(context);

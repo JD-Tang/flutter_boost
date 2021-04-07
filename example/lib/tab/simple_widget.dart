@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/boost_navigator.dart';
 import 'package:flutter_boost/page_visibility.dart';
-import '../main.dart';
 
 class SimpleWidget extends StatefulWidget {
   final Map params;
@@ -50,11 +49,13 @@ class _SimpleWidgetState extends State<SimpleWidget>
 
   @override
   void onPageShow({bool isForegroundEvent}) {
-    print('$_kTag#onPageShow, ${widget.uniqueId}, isForegroundEvent=$isForegroundEvent, $this');
+    print(
+        '$_kTag#onPageShow, ${widget.uniqueId}, isForegroundEvent=$isForegroundEvent, $this');
   }
 
   void onPageHide({bool isBackgroundEvent}) {
-    print('$_kTag#onPageHide, ${widget.uniqueId}, isBackgroundEvent=$isBackgroundEvent, $this');
+    print(
+        '$_kTag#onPageHide, ${widget.uniqueId}, isBackgroundEvent=$isBackgroundEvent, $this');
   }
 
   @override
@@ -70,7 +71,7 @@ class _SimpleWidgetState extends State<SimpleWidget>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(top: 80.0),
+                margin: const EdgeInsets.only(top: 100.0),
                 child: Text(
                   widget.messages,
                   style: TextStyle(fontSize: 28.0, color: Colors.blue),
@@ -81,7 +82,7 @@ class _SimpleWidgetState extends State<SimpleWidget>
                 margin: const EdgeInsets.only(top: 32.0),
                 child: Text(
                   widget.uniqueId,
-                  style: TextStyle(fontSize: 22.0, color: Colors.red),
+                  style: TextStyle(fontSize: 16.0, color: Colors.red),
                 ),
                 alignment: AlignmentDirectional.center,
               ),
@@ -92,7 +93,7 @@ class _SimpleWidgetState extends State<SimpleWidget>
                     color: Colors.yellow,
                     child: Text(
                       'open native page',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () => BoostNavigator.of().push("native"),
               ),
@@ -102,8 +103,8 @@ class _SimpleWidgetState extends State<SimpleWidget>
                     margin: const EdgeInsets.all(30.0),
                     color: Colors.yellow,
                     child: Text(
-                      'open flutter page',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'open flutter page(通过路由不新起页面)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () => BoostNavigator.of().push("flutterPage",
                     arguments: <String, String>{'from': widget.uniqueId}),
@@ -114,8 +115,8 @@ class _SimpleWidgetState extends State<SimpleWidget>
                     margin: const EdgeInsets.all(30.0),
                     color: Colors.yellow,
                     child: Text(
-                      'open flutter page with FlutterView',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'open flutter page(通过路由新起页面)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () => BoostNavigator.of().push("flutterPage",
                     withContainer: true,
@@ -127,8 +128,8 @@ class _SimpleWidgetState extends State<SimpleWidget>
                     margin: const EdgeInsets.all(30.0),
                     color: Colors.yellow,
                     child: Text(
-                      'Navigator.push',
-                      style: TextStyle(fontSize: 22.0, color: Colors.black),
+                      'Navigator.push(通过内部路由跳转)',
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
                     )),
                 onTap: () => Navigator.push(context, MaterialPageRoute<void>(
                   builder: (BuildContext context) {
@@ -151,7 +152,7 @@ class _SimpleWidgetState extends State<SimpleWidget>
                 width: 200,
                 child: Text(
                   '',
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
               )
             ],

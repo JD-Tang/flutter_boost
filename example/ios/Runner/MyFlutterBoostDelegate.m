@@ -15,14 +15,14 @@
 
 
 - (void) pushNativeRoute:(NSString *) pageName arguments:(NSDictionary *) arguments {
-    BOOL animated = [arguments[@"animated"] boolValue];
+//    BOOL animated = [arguments[@"animated"] boolValue];
     BOOL present= [arguments[@"present"] boolValue];
     UIViewControllerDemo *nvc = [[UIViewControllerDemo alloc] initWithNibName:@"UIViewControllerDemo" bundle:[NSBundle mainBundle]];
     if(present){
-        [self.navigationController presentViewController:nvc animated:animated completion:^{
+        [self.navigationController presentViewController:nvc animated:YES completion:^{
         }];
     }else{
-        [self.navigationController pushViewController:nvc animated:animated];
+        [self.navigationController pushViewController:nvc animated:YES];
     }
 }
 
@@ -35,13 +35,13 @@
     
     [vc setName:pageName uniqueId:uniqueId params:arguments];
     
-    BOOL animated = [arguments[@"animated"] boolValue];
+//    BOOL animated = [arguments[@"animated"] boolValue];
     BOOL present= [arguments[@"present"] boolValue];
     if(present){
-        [self.navigationController presentViewController:vc animated:animated completion:^{
+        [self.navigationController presentViewController:vc animated:YES completion:^{
         }];
     }else{
-        [self.navigationController pushViewController:vc animated:animated];
+        [self.navigationController pushViewController:vc animated:YES];
 
     }
 }

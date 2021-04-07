@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boost_example/case/platform_view.dart';
 import 'package:flutter_boost/boost_navigator.dart';
-import 'package:flutter_boost/logger.dart';
+import 'package:flutter_boost_example/case/platform_view.dart';
 
 class FirstRouteWidget extends StatefulWidget {
   @override
@@ -200,19 +199,31 @@ class _EmbeddedFirstRouteWidgetState extends State<EmbeddedFirstRouteWidget> {
   Widget build(BuildContext context) {
     print('_EmbeddedFirstRouteWidgetState build called!');
     return Scaffold(
-      body: Center(
-        child: RaisedButton(
-          child: Text('Open second route2'),
-          onPressed: () {
-            print("open second page!");
-            // FlutterBoost.singleton.open("second").then((Map<dynamic,dynamic> value) {
-            //   print(
-            //       "call me when page is finished. did receive second route result $value");
-            // });
-          },
-        ),
+        body: Container(
+      color: Colors.green,
+      child: Column(
+        children: [
+          Container(
+            height: 400,
+            child: Center(
+              child: RaisedButton(
+                child: Text('Open second route2'),
+                onPressed: () {
+                  print("open second page!");
+                  BoostNavigator.of().push('flutterPage', withContainer: false);
+                },
+              ),
+            ),
+          ),
+          Container(
+            width: 1000,
+            height: 300,
+            color: Colors.cyan,
+            child: Text('this is a test text'),
+          ),
+        ],
       ),
-    );
+    ));
   }
 
   @override

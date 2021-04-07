@@ -42,6 +42,7 @@
 - (void)pushMe
 {
     UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor cyanColor];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

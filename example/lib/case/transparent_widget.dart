@@ -6,7 +6,7 @@ class TransparentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0x00000000),
+      backgroundColor: Colors.deepPurple,
       body: Container(
         alignment: Alignment.bottomCenter,
         child: GestureDetector(
@@ -15,7 +15,7 @@ class TransparentWidget extends StatelessWidget {
           },
           child: Container(
             height: 300,
-            color: const Color(0xffffffff),
+            color: Colors.cyan,
             child: const Text(
               '部分区域透明的widget',
               style: TextStyle(fontSize: 26.0, color: Colors.blue),
